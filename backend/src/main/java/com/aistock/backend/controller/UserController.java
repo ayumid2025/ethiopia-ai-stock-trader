@@ -27,3 +27,11 @@ public class UserController {
                 .orElse(ResponseEntity.notFound().build());
     }
 }
+@PostMapping("/api/trading/signal")
+public ResponseEntity<?> receiveSignal(@RequestBody SignalRequest signal) {
+    // Authenticate the AI service (e.g., via API key)
+    // Process signal: e.g., buy 10 shares of AAPL at market price
+    // For now, assume we have a fixed user (e.g., user ID 1)
+    tradingService.buyOrder(1L, signal.getSymbol(), signal.getPrice(), signal.getQuantity());
+    return ResponseEntity.ok().build();
+}
