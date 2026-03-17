@@ -6,6 +6,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 
+public void processSignal(Long userId, SignalRequest signal) {
+    if ("BUY".equalsIgnoreCase(signal.getAction())) {
+        buyOrder(userId, signal.getSymbol(), signal.getPrice(), signal.getQuantity());
+    } else if ("SELL".equalsIgnoreCase(signal.getAction())) {
+        sellOrder(userId, signal.getSymbol(), signal.getPrice(), signal.getQuantity());
+    }
+}
 @Service
 public class TradingService {
     private final UserRepository userRepository;
